@@ -1,0 +1,16 @@
+<!-- templates/base.html -->
+<header>
+    <a href="{% url 'form' %}">
+        form
+    </a>
+    |
+    <a href="{% url 'table' %}">
+        table
+    </a>
+    |
+    <a href="{% url 'index' %}">
+        index
+    </a>
+</header>
+{% block content %}
+{% endblock %}

@@ -1,0 +1,1 @@
+web: gunicorn Nikolay.wsgi --log-file -
