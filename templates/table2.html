@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1> New question </h1>
+
+<form action = "" method = 'post'> {% csrf_token %}
+<table>
+<tr>
+    <th>подтягивания</th>
+    <th>{{ form.pull1 }}</th>
+    <th>{{ form.pull2 }}</th>
+</tr>
+    <tr>
+    <th>отжимания</th>
+    <th>{{ form.push1 }}</th>
+    <th>{{ form.push2 }}</th>
+</tr>
+    <tr>
+    <th>присидания</th>
+    <th>{{ form.sit1 }}</th>
+    <th>{{ form.sit2 }}</th>
+</tr>
+    <tr>
+    <th>прыжки</th>
+    <th colspan="2">{{ form.jumping1 }}</th>
+
+</tr>
+
+</table>
+   <input type = 'submit' value = 'Save' />
+
+</form>
+{% endblock %}

@@ -1,9 +1,13 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
-from .forms import Player
+from .forms import Player, DateForms
 from .models import Player as Pl
 from django.views.generic import TemplateView
+
+
+class HomePageView(TemplateView):
+    template_name = 'home.html'
 
 
 class TablePageView(TemplateView):
@@ -62,3 +66,12 @@ def DK_user(request, name):
 
     return render(request, 'DK_new.html', {"user": user})
 
+def DK_table(request):
+    if request.method == 'POST':
+        form = DateForms(request.POST)
+        print(request.POST.get('pull1'))
+        if form.is_valid():
+            return HttpResponseRedirect("/")
+    else:
+        form = DateForms()
+    return render(request, 'table2.html', {"form": form})
