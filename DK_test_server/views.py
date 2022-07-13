@@ -16,12 +16,24 @@ class TablePageView(TemplateView):
     template_name = 'table.html'
 
 
-class TrainingReqwestHandler():
+class TrainingRequestHandler():
     def __init__(self, request):
-        self.username = request.user.username
+        self.username = request.user
         self.date = datetime.today().strftime('%Y-%m-%d')
         for key, val in request.POST.items():
             exec('self.' + key + '=val')
+    def create_single_training(self):
+        single_training = DateTraning.objects.create(id=self.username, date=self.date)
+        Pull.objects.create(id=single_training.tranings_id, pull1=self.pull1, pull2=self.pull2)
+        Push.objects.create(id=single_training.tranings_id, push1=self.push1, push2=self.push2)
+        Sit.objects.create(id=single_training.tranings_id, sit1=self.sit1, sit2=self.sit2)
+        Jumping.objects.create(id=single_training.tranings_id, jumping1=self.jumping1)
+        Entrance.objects.create(id=single_training.tranings_id, entrance1=self.entrance1)
+        Press.objects.create(id=single_training.tranings_id, press1=self.press1, press2=self.press2)
+        Weight.objects.create(id=single_training.tranings_id, weight1=self.weight1)
+        Weightcategory.objects.create(id=single_training.tranings_id, weightcategory1=self.weightcategory1)
+        Bars.objects.create(id=single_training.tranings_id, bars1=self.bars1, bars2=self.bars2)
+        Stadium.objects.create(id=single_training.tranings_id, stadium1=self.stadium1, stadium2=self.stadium2)
 
 
 def index(request):
@@ -82,7 +94,8 @@ def DK_table(request):
     if request.method == 'POST':
         form = DateForms(request.POST)
         print(request.user.username)
-        tranings = TrainingReqwestHandler(request)
+        tranings = TrainingRequestHandler(request)
+        tranings.create_single_training()
         if form.is_valid():
             return HttpResponseRedirect('/')
     else:

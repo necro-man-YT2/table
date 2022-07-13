@@ -18,7 +18,7 @@ class Question(models.Model):
 class DateTraning(models.Model):
     id = models.OneToOneField(User, on_delete=models.CASCADE, )
     date = models.DateTimeField()
-    tranings_id = models.PositiveSmallIntegerField(primary_key=True)
+    tranings_id = models.AutoField(primary_key=True)
     #push_ups = models.PositiveSmallIntegerField(default=0)
     #sit_ups = models.PositiveSmallIntegerField(default=0)
     #jumping = models.PositiveSmallIntegerField(default=0)
@@ -33,61 +33,61 @@ class DateTraning(models.Model):
         return self.id
 
 class Pull(models.Model):
-    id = models.OneToOneField(DateTraning, on_delete=models.CASCADE, primary_key=True)
+    id = models.OneToOneField(DateTraning, related_name='tranings_id', on_delete=models.CASCADE, primary_key=True)
     pull1 = models.PositiveSmallIntegerField(default=0)
     pull2 = models.PositiveSmallIntegerField(default=0)
 
 
 class Push(models.Model):
-    id = models.OneToOneField(DateTraning, on_delete=models.CASCADE, primary_key=True)
+    id = models.OneToOneField(DateTraning,related_name='tranings_id', on_delete=models.CASCADE, primary_key=True)
     push1 = models.PositiveSmallIntegerField(default=0)
     push2 = models.PositiveSmallIntegerField(default=0)
 
 
 class Sit(models.Model):
-    id = models.OneToOneField(DateTraning, on_delete=models.CASCADE, primary_key=True)
+    id = models.OneToOneField(DateTraning, related_name='tranings_id',on_delete=models.CASCADE, primary_key=True)
     sit1 = models.PositiveSmallIntegerField(default=0)
     sit2 = models.PositiveSmallIntegerField(default=0)
 
 
 class Jumping(models.Model):
-    id = models.OneToOneField(DateTraning, on_delete=models.CASCADE, primary_key=True)
+    id = models.OneToOneField(DateTraning, related_name='tranings_id',on_delete=models.CASCADE, primary_key=True)
     jumping1 = models.PositiveSmallIntegerField(default=0)
     jumping2 = models.PositiveSmallIntegerField(default=0)
 
 
 class Entrance(models.Model):
-    id = models.OneToOneField(DateTraning, on_delete=models.CASCADE, primary_key=True)
+    id = models.OneToOneField(DateTraning, related_name='tranings_id',on_delete=models.CASCADE, primary_key=True)
     entrance1 = models.PositiveSmallIntegerField(default=0)
     entrance2 = models.PositiveSmallIntegerField(default=0)
 
 
 class Press(models.Model):
-    id = models.OneToOneField(DateTraning, on_delete=models.CASCADE, primary_key=True)
+    id = models.OneToOneField(DateTraning, related_name='tranings_id',on_delete=models.CASCADE, primary_key=True)
     press1 = models.PositiveSmallIntegerField(default=0)
     press2 = models.PositiveSmallIntegerField(default=0)
 
 
 class Weight(models.Model):
-    id = models.OneToOneField(DateTraning, on_delete=models.CASCADE, primary_key=True)
+    id = models.OneToOneField(DateTraning, related_name='tranings_id',on_delete=models.CASCADE, primary_key=True)
     weight1 = models.PositiveSmallIntegerField(default=0)
     weight2 = models.PositiveSmallIntegerField(default=0)
 
 
 class Weightcategory(models.Model):
-    id = models.OneToOneField(DateTraning, on_delete=models.CASCADE, primary_key=True)
+    id = models.OneToOneField(DateTraning, related_name='tranings_id',on_delete=models.CASCADE, primary_key=True)
     weightcategory1 = models.PositiveSmallIntegerField(default=0)
     weightcategory2 = models.PositiveSmallIntegerField(default=0)
 
 
 class Bars(models.Model):
-    id = models.OneToOneField(DateTraning, on_delete=models.CASCADE, primary_key=True)
+    id = models.OneToOneField(DateTraning, related_name='tranings_id',on_delete=models.CASCADE, primary_key=True)
     bars1 = models.PositiveSmallIntegerField(default=0)
     bars2 = models.PositiveSmallIntegerField(default=0)
 
 
 class Stadium(models.Model):
-    id = models.OneToOneField(DateTraning, on_delete=models.CASCADE, primary_key=True)
+    id = models.OneToOneField(DateTraning, related_name='tranings_id', on_delete=models.CASCADE, primary_key=True)
     stadium1 = models.PositiveSmallIntegerField(default=0)
     stadium2 = models.PositiveSmallIntegerField(default=0)
 
