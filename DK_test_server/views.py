@@ -4,6 +4,8 @@ from django.shortcuts import render
 from .forms import Player, DateForms
 from .models import Player as Pl
 from django.views.generic import TemplateView
+from datetime import datetime
+from .models import *
 
 
 class HomePageView(TemplateView):
@@ -12,6 +14,14 @@ class HomePageView(TemplateView):
 
 class TablePageView(TemplateView):
     template_name = 'table.html'
+
+
+class TrainingReqwestHandler():
+    def __init__(self, request):
+        self.username = request.user.username
+        self.date = datetime.today().strftime('%Y-%m-%d')
+        for key, val in request.POST.items():
+            exec('self.' + key + '=val')
 
 
 def index(request):
@@ -61,17 +71,24 @@ def DK_list(request):
     count = player.count()
     return render(request, "DK_list.html", {"people": player, "count": count})
 
+
 def DK_user(request, name):
     user = Pl.objects.filter(name=name)
 
     return render(request, 'DK_new.html', {"user": user})
 
+
 def DK_table(request):
     if request.method == 'POST':
         form = DateForms(request.POST)
-        print(request.POST.get('pull1'))
+        print(request.user.username)
+        tranings = TrainingReqwestHandler(request)
         if form.is_valid():
-            return HttpResponseRedirect("/")
+            return HttpResponseRedirect('/')
     else:
         form = DateForms()
     return render(request, 'table2.html', {"form": form})
+
+
+def push():
+    pass
